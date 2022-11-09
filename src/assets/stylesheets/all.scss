@@ -1,0 +1,10 @@
+@import "~bootstrap/scss/functions";
+@import "./helpers/variables";
+@import "~bootstrap/scss/mixins";
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+@import "./components/header";
+@import "./components/cover";
+@import "./components/coupon";
+@import "./components/subscribe";

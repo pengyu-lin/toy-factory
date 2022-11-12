@@ -298,7 +298,7 @@ $cyans: (
 // fusv-enable
 
 // scss-docs-start theme-color-variables
-$primary: $blue !default;
+$primary: #74a9a4; //$blue !default;
 $secondary: $gray-600 !default;
 $success: $green !default;
 $info: $cyan !default;
@@ -1265,7 +1265,7 @@ $card-spacer-x: $spacer !default;
 $card-title-spacer-y: $spacer * 0.5 !default;
 $card-border-width: $border-width !default;
 $card-border-color: var(--#{$prefix}border-color-translucent) !default;
-$card-border-radius: $border-radius !default;
+$card-border-radius: 0; //$border-radius !default;
 $card-box-shadow: null !default;
 $card-inner-border-radius: subtract(
   $card-border-radius,

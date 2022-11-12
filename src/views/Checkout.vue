@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
+<Loading :active="isLoading"></Loading>
   <div class="container py-5">
     <div class="d-flex align-items-center justify-content-around text-nowrap">
       <div
@@ -29,9 +30,50 @@
         <p class="mb-0">STEP 3</p>
       </div>
     </div>
-  </div>
-  <div class="my-5 row justify-content-center">
-    <Form class="col-md-6" v-slot="{ errors }" @submit="createOrder">
+  <div class="my-5 row flex-row-reverse justify-content-around">
+  <div class="col-md-4">
+    <div class="border p-3">
+    <table class="table align-middle justify-content-around">
+            <thead>
+              <tr>
+                <th>產品名稱</th>
+                <th>數量</th>
+                <th>價格</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in cart.carts" :key="item.id">
+                <td>{{ item.product.title }}</td>
+                <td style="width:100px"><div class="input-group input-group-sm">
+                    {{item.qty}}
+                    / {{ item.product.unit }}
+                  </div></td>
+                <td>{{$filters.currency(item.final_total)}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="p-3">
+            <div class="d-flex justify-content-between">
+              <p>商品共計:</p>
+              <p>{{ $filters.currency(cart.total) }}</p>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control lh-lg" v-model="coupon_code" placeholder="輸入優惠碼">
+              <button class="btn btn-dark" type="button" @click="addCouponCode">套用</button>
+            </div>
+            <div class="d-flex justify-content-between" v-if="cart.final_total === cart.total">
+              <p>合計:</p>
+              <p>{{ $filters.currency(cart.final_total) }}</p>
+            </div>
+            <p class="text-success" v-if="cart.final_total !== cart.total">已套用優惠券</p>
+            <div class="d-flex justify-content-between text-success" v-if="cart.final_total !== cart.total" >
+              <p>折扣價：</p>
+              <p>{{ $filters.currency(cart.final_total) }}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    <Form class="col-md-6 border p-3" v-slot="{ errors }" @submit.prevent="createOrder">
       <div class="mb-3">
         <label for="email" class="form-label">Email*</label>
         <Field
@@ -122,13 +164,14 @@
       </div>
       <div class="text-end">
         <button
-          class="btn btn-primary"
+          class="btn btnStyle"
           :class="{ disabled: this.payment === '選擇付款方式' }"
         >
           送出訂單
         </button>
       </div>
     </Form>
+  </div>
   </div>
 </template>
 
@@ -146,7 +189,12 @@ export default {
         message: ''
       },
       orderId: '',
-      payment: '選擇付款方式'
+      payment: '選擇付款方式',
+      cart: {},
+      coupon_code: '',
+      status: {
+        loadingItem: ''
+      }
     }
   },
   methods: {
@@ -157,7 +205,31 @@ export default {
         this.orderId = res.data.orderId
         this.$router.push(`/checkout/${this.orderId}`)
       })
+    },
+    getCart () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.isLoading = true
+      this.$http.get(url).then((response) => {
+        console.log(response)
+        this.cart = response.data.data
+        this.isLoading = false
+      })
+    },
+    addCouponCode () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
+      const coupon = {
+        code: this.coupon_code
+      }
+      this.isLoading = true
+      this.$http.post(url, { data: coupon }).then((response) => {
+        this.$httpMessageState(response, '加入優惠券')
+        this.getCart()
+        this.isLoading = false
+      })
     }
+  },
+  created () {
+    this.getCart()
   }
 }
 </script>

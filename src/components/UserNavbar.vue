@@ -1,9 +1,9 @@
 <template>
-<div class="bg-light border-bottom">
+<div class=" bg-light sticky-top" style="box-shadow: 0 2px 4px 0 rgba(0,0,0,.2)">
       <div class="container">
-        <nav class="navbar navbar-expand-lg bg-light">
+        <nav class="navbar navbar-expand-lg bg-transparent">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">玩具工坊</a>
+            <a class="navbar-brand fs-3 fw-bold" href="#"><img src="../assets/images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top"> 玩具工坊</a>
             <button
               class="navbar-toggler"
               type="button"
@@ -16,13 +16,13 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
               <div class="navbar-nav">
-                <router-link to="/products" class="nav-link">產品列表</router-link>
-                <router-link to="/faq" class="nav-link">常見問題</router-link>
+                <router-link to="/products" class="nav-link fs-5">產品列表</router-link>
+                <router-link to="/faq" class="nav-link fs-5">常見問題</router-link>
               </div>
-            <ul class="nav fs-5">
-              <li class="nav-item"><router-link to="/favorite" class="nav-link"><i class="bi bi-suit-heart-fill"></i></router-link></li>
-              <li class="nav-item"><router-link to="/cart" class="nav-link"><i class="bi bi-cart3"></i></router-link></li>
-              <li class="nav-item"><router-link to="/login" class="nav-link"><i class="bi bi-person-circle"></i></router-link></li>
+            <ul class="nav fs-5 navbar-nav">
+              <li class="nav-item position-relative"><router-link to="/favorite" class="nav-link"><span class="position-absolute top-25 end-0 badge rounded-pill bg-danger" :class="{'d-none': favNum===0}" style="font-size:10px">{{favNum}}</span><i class="bi bi-suit-heart-fill fs-3"></i><span class="d-lg-none fs-5"> 我的最愛</span></router-link></li>
+              <li class="nav-item position-relative"><router-link to="/cart" class="nav-link"><span class="position-absolute top-25 end-0 badge rounded-pill bg-danger" style="font-size:10px" :class="{'d-none': cartNum===0}">{{cartNum}}</span><i class="bi bi-cart3 fs-3"></i><span class="d-lg-none fs-5"> 購物車</span></router-link></li>
+              <li class="nav-item"><router-link to="/login" class="nav-link"><i class="bi bi-person-circle fs-3"></i><span class="d-lg-none fs-5"> 後臺登入</span></router-link></li>
             </ul>
             </div>
           </div>
@@ -30,3 +30,48 @@
       </div>
     </div>
 </template>
+
+<script>
+import favorite from '@/methods/favorite'
+
+export default {
+  data () {
+    return {
+      favorite: favorite.getFavorite() || [],
+      cartNum: 0,
+      favNum: 0
+    }
+  },
+  inject: ['emitter'],
+  methods: {
+    getCart () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.isLoading = true
+      this.$http.get(url).then((response) => {
+        console.log(response)
+        this.cartNum = response.data.data.carts.length
+      })
+    },
+    getFavorite () {
+      this.favorite = favorite.getFavorite()
+      this.favNum = this.favorite.length
+    }
+  },
+  created () {
+    this.getCart()
+    this.getFavorite()
+    this.emitter.on('update-cart', this.getCart)
+    this.emitter.on('update-favorite', this.getFavorite)
+  }
+}
+</script>
+
+<style lang="scss">
+.nav-link {
+  color:black;
+  &.active, &:hover {
+    color:#74a9a4;
+    border-bottom: 2px solid #74a9a4;
+  }
+}
+</style>

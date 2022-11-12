@@ -8,7 +8,10 @@
         <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
       </ol>
     </nav>
-    <div class="row row-cols-1 justify-content-center flex-row-reverse">
+    <div class="row row-cols-1 justify-content-center">
+      <div class="col col-md-7">
+        <img :src="product.imageUrl" alt="" class="img-fluid mb-3">
+      </div>
       <div class="col col-md-5">
         <h2>{{ product.title }}</h2>
         <hr>
@@ -16,23 +19,20 @@
         <div class="py-3">{{ product.content }}</div>
         <div class="h5" v-if="product.price===product.origin_price">{{ $filters.currency(product.origin_price) }} 元</div>
         <del class="h6" v-if="product.price!==product.origin_price">原價 {{ $filters.currency(product.origin_price) }} 元</del>
-        <div class="h5" v-if="product.price!==product.origin_price">現在只要 {{ $filters.currency(product.price) }} 元</div>
-        <div class="input-group pb-3">
-        <select class="form-select" aria-label="Default select example" v-model="qty">
+        <div class="h5 text-danger" v-if="product.price!==product.origin_price">現在只要 {{ $filters.currency(product.price) }} 元</div>
+        <div class="input-group pb-3 w-50">
+        <select class="form-select border-dark" aria-label="Default select example" v-model="qty" >
           <option selected disabled>選擇數量</option>
           <option :value="qty" v-for="qty in 10" :key="qty">{{ qty }}</option>
         </select>
         <button
           type="button"
-          class="btn btn-outline-danger"
+          class="btn btn-outline-dark"
           @click="addToCart(product.id, qty)"
         >
-          加到購物車
+          加入購物車
         </button>
         </div>
-      </div>
-      <div class="col col-md-7">
-        <img :src="product.imageUrl" alt="" class="img-fluid mb-3">
       </div>
     </div>
   </div>
@@ -69,7 +69,6 @@ export default {
       this.$http.post(url, { data: cart }).then((response) => {
         this.isLoading = false
         this.$httpMessageState(response, '加入購物車')
-        this.$router.push('/user/cart')
       })
     }
   },

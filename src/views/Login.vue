@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-<UserNavbar></UserNavbar>
   <div class="container mt-5">
     <form class="row justify-content-center"
       @submit.prevent="signIn">
@@ -30,8 +29,12 @@
           />
         </div>
 
-        <div class="text-end mt-4">
-          <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+        <div class="d-flex justify-content-between align-items-center mt-4">
+          <div>
+          <router-link to="/" class="fs-5 fw-bold text-decoration-none"><i class="bi bi-arrow-left"></i>回到首頁</router-link>
+          <p class="text-secondary">不是管理者嗎?</p>
+          </div>
+          <button class="btn btnStyle" type="submit">登入</button>
         </div>
       </div>
     </form>
@@ -39,8 +42,6 @@
 </template>
 
 <script>
-import UserNavbar from '../components/UserNavbar.vue'
-
 export default {
   data () {
     return {
@@ -49,9 +50,6 @@ export default {
         password: ''
       }
     }
-  },
-  components: {
-    UserNavbar
   },
   methods: {
     signIn () {

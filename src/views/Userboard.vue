@@ -5,8 +5,8 @@
 <div class="container-fluid mt-3">
     <ToastMessages></ToastMessages>
     <router-view/>
-    <Footer></Footer>
 </div>
+    <Footer></Footer>
 </template>
 
 <script>

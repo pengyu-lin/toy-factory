@@ -37,7 +37,7 @@
     <h3>商品會在2至3個工作天內送達</h3>
   </div>
   <div class="d-flex justify-content-center">
-    <button type="buttton" class="btn btn-primary m-3" @click="this.$router.push('/')">回首頁</button>
-    <button type="buttton" class="btn btn-primary m-3" @click="this.$router.push('/products')">繼續購物!</button>
+    <button type="buttton" class="btn btnStyle m-3" @click="this.$router.push('/')">回首頁</button>
+    <button type="buttton" class="btn btnStyle m-3" @click="this.$router.push('/products')">繼續購物!</button>
   </div>
 </template>

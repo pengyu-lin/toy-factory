@@ -27,7 +27,7 @@
               </div>
               <div class="d-flex">
                 <button type="button" class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white" @click="addCart(item.id)"><i class="bi bi-cart-plus"></i></button>
-                <button type="button" class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white" @click="removeFavortie(item.id)"><i class="bi bi-trash"></i></button>
+                <button type="button" class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white" @click="removeFavortie(item, item.id)"><i class="bi bi-trash"></i></button>
               </div>
             </div>
         </div>
@@ -78,13 +78,24 @@ export default {
           this.emitter.emit('update-cart', id)
           this.isLoading = false
         })
-      this.removeFavortie(id)
+      this.favorite.splice(this.favorite.indexOf(id), 1)
+      favorite.addToFavorite(this.favorite)
+      this.emitter.emit('update-favorite', this.favorite)
+      this.getFavorite()
     },
-    removeFavortie (id) {
+    removeFavortie (item, id) {
       this.isLoading = true
       this.favorite.splice(this.favorite.indexOf(id), 1)
       favorite.addToFavorite(this.favorite)
       this.emitter.emit('update-favorite', this.favorite)
+      this.$httpMessageState(
+        {
+          data: {
+            success: true
+          }
+        },
+          `將"${item.title}"移除我的最愛`
+      )
       this.getFavorite()
       this.isLoading = false
     }

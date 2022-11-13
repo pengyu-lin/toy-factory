@@ -73,7 +73,7 @@
           </div>
         </div>
     </div>
-    <Form class="col-md-6 border p-3" v-slot="{ errors }" @submit.prevent="createOrder">
+    <Form class="col-md-6 border p-3" v-slot="{ errors }" @submit="createOrder">
       <div class="mb-3">
         <label for="email" class="form-label">Email*</label>
         <Field

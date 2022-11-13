@@ -113,8 +113,24 @@ export default {
       this.isLoading = true
       if (this.favorite.includes(item.id)) {
         this.favorite.splice(this.favorite.indexOf(item.id), 1)
+        this.$httpMessageState(
+          {
+            data: {
+              success: true
+            }
+          },
+          `將"${item.title}"移除我的最愛`
+        )
       } else {
         this.favorite.push(item.id)
+        this.$httpMessageState(
+          {
+            data: {
+              success: true
+            }
+          },
+          `將"${item.title}"加入我的最愛`
+        )
       }
       this.isLoading = false
       favorite.addToFavorite(this.favorite)

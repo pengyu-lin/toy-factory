@@ -21,7 +21,7 @@
               <img :src="item.imageUrl" class="productImg img-fluid" alt="">
               <p class="h5 pt-ms-0 pt-3">{{item.title}}</p>
               <div class="d-flex flex-column">
-                <p class="h5" v-if="item.price===item.origin_price">{{ $filters.currency(item.origin_price) }} 元</p>
+                <p class="h5 mb-md-0" v-if="item.price===item.origin_price">{{ $filters.currency(item.origin_price) }} 元</p>
                 <del class="h6" v-if="item.price!==item.origin_price">原價 {{ $filters.currency(item.origin_price) }} 元</del>
                 <p class="h5 text-danger" v-if="item.price!==item.origin_price">特價 {{ $filters.currency(item.price) }} 元</p>
               </div>

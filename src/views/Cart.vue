@@ -17,34 +17,34 @@
         </div>
       <div class="row">
         <div class="col-lg-8">
-          <div class="border border-primary d-flex flex-column flex-md-row justify-content-around align-items-center p-3 mb-3 text-center" v-for="item in cart.carts" :key="item.id">
+          <div class="border border-primary d-flex flex-column flex-md-row align-items-center p-3 mb-3 text-center" v-for="item in cart.carts" :key="item.id">
               <img :src="item.product.imageUrl" class="productImg" alt="">
-              <p class="h5 pt-3 pt-md-0">{{item.product.title}}</p>
+              <p class="h6 pt-3 pt-md-0" style="width:30%">{{item.product.title}}</p>
               <div class="input-group" style="width:150px">
-                    <button
-                          type="button"
-                          class="btn btn-outline-dark"
-                          @click="updateCart(item, item.qty - 1)"
-                          :disabled="item.qty == 1"
-                        >
-                          <i class="bi bi-dash" />
-                        </button>
-                        <input
-                          type="text"
-                          min="1"
-                          v-model.number="item.qty"
-                          class="form-control form-control-sm text-center border-dark"
-                          readonly
-                        />
-                        <button
-                          type="button"
-                          class="btn btn-outline-dark"
-                          @click="updateCart(item, item.qty + 1)"
-                        >
-                          <i class="bi bi-plus" />
-                        </button>
-                  </div>
-                  <p>NT{{$filters.currency(item.final_total)}}</p>
+                <button
+                      type="button"
+                      class="btn btn-outline-dark"
+                      @click="updateCart(item, item.qty - 1)"
+                      :disabled="item.qty == 1"
+                    >
+                      <i class="bi bi-dash" />
+                </button>
+                <input
+                      type="text"
+                      min="1"
+                      v-model.number="item.qty"
+                      class="form-control form-control-sm text-center border-dark"
+                      readonly
+                    />
+                <button
+                      type="button"
+                      class="btn btn-outline-dark"
+                      @click="updateCart(item, item.qty + 1)"
+                    >
+                      <i class="bi bi-plus" />
+                </button>
+              </div>
+                  <p style="width:20%">NT{{$filters.currency(item.final_total)}}</p>
                 <button type="button" class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white" @click="removeCartItem(item.id)"><i class="bi bi-trash"></i></button>
             </div>
         </div>

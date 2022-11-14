@@ -31,9 +31,42 @@
           <h3><i class="bi bi-star-fill text-warning"></i> 精選玩具</h3>
           <a href="#" class="text-decoration-none fs-5 text-end fw-bold" @click.prevent="this.$router.push('/products')">更多玩具<i class="bi bi-arrow-right"></i></a>
         </div>
-        <div class="row row-cols-lg-4 row-cols-1 row-cols-sm-2 g-3 g-lg-4 justify-content-center">
-          <div class="col" v-for="item in filterProducts" :key="item.id">
-            <div class="card h-100 border-0 overflow-hidden shadow">
+        <swiper
+    :slidesPerView="4"
+    :spaceBetween="30"
+    :autoplay="{
+      delay: 3000,
+      disableOnInteraction: false,
+    }"
+    :loop="true"
+    :modules="modules"
+    :breakpoints="{
+      '0': {
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
+      '576': {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      '768': {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      '992': {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      '1200': {
+        slidesPerView: 4,
+        spaceBetween: 30,
+      },
+    }"
+
+    class="mySwiper"
+  >
+          <swiper-slide v-for="item in filterProducts" :key="item.id">
+            <div class="card h-100 border overflow-hidden">
               <img :src="item.imageUrl" class="card-img-top img-fluid" alt="blocks" style="object-fit:cover; height: 200px;cursor:pointer" @click="getProduct(item.id)">
               <div class="card-body d-flex flex-column justify-content-between">
                 <div>
@@ -52,9 +85,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </swiper-slide>
+          </swiper>
         </div>
-      </div>
     </section>
 
     <section class="container py-5">
@@ -81,6 +114,13 @@
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay } from 'swiper'
+
+// Import Swiper styles
+import 'swiper/css'
+
+import 'swiper/css/pagination'
 
 export default {
   data () {
@@ -93,6 +133,15 @@ export default {
     }
   },
   inject: ['emitter'],
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  setup () {
+    return {
+      modules: [Autoplay]
+    }
+  },
   methods: {
     getProducts () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`

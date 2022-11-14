@@ -7,7 +7,7 @@
     <router-view/>
 </div>
     <Footer></Footer>
-    <div class="position-fixed end-0 bottom-0 p-3 text-strat">
+    <div class="position-fixed start-0 bottom-0 p-3 text-strat" style="z-index:1000">
     <button type="button" class="btn btn-primary text-white rounded-circle fs-5" style="height:50px;width:50px" @click="scrollToTop">
       <i class="bi bi-arrow-up"></i>
     </button>

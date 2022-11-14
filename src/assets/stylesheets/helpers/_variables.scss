@@ -1389,7 +1389,7 @@ $popover-arrow-outer-color: var(--#{$prefix}border-color-translucent) !default;
 // Toasts
 
 // scss-docs-start toast-variables
-$toast-max-width: 350px !default;
+$toast-max-width: 300px; //350px !default;
 $toast-padding-x: 0.75rem !default;
 $toast-padding-y: 0.5rem !default;
 $toast-font-size: 0.875rem !default;

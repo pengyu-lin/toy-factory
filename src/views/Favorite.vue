@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
 <Loading :active="isLoading"></Loading>
-<div class="container py-5">
+<div class="container py-lg-5">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><router-link to="/">首頁</router-link></li>

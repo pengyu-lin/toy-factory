@@ -1,0 +1,13 @@
+.nav-link {
+  color: black;
+  &.active,
+  &:hover {
+    color: #74a9a4;
+    border-bottom: 2px solid #74a9a4;
+  }
+}
+.badgeNum {
+  @media (max-width: 991px) {
+    display: none;
+  }
+}

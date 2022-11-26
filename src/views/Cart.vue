@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template v-if="cart.carts">
 <Loading :active="isLoading"></Loading>
-    <div class="container py-5">
+    <div class="container py-lg-5">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><router-link to="/">首頁</router-link></li>
@@ -45,7 +45,7 @@
                 </button>
               </div>
                   <p class="my-3 my-md-0" style="width:20%">NT{{$filters.currency(item.final_total)}}</p>
-                <button type="button" class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white" @click="removeCartItem(item.id)"><i class="bi bi-trash"></i></button>
+                <button type="button" class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white" @click="removeCartItem(item, item.id)"><i class="bi bi-trash"></i></button>
             </div>
         </div>
         <div class="col-lg-4" :class="{'d-none':cart.total===0}">
@@ -110,12 +110,12 @@ export default {
         this.isLoading = false
       })
     },
-    removeCartItem (id) {
+    removeCartItem (item, id) {
       this.status.loadingItem = id
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
       this.isLoading = true
       this.$http.delete(url).then((response) => {
-        this.$httpMessageState(response, '移除購物車品項')
+        this.$httpMessageState(response, `將"${item.product.title}"移除購物車`)
         this.status.loadingItem = ''
         this.getCart()
         this.isLoading = false

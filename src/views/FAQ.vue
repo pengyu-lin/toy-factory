@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <div class="container py-5">
+    <div class="container py-lg-5">
       <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><router-link to="/">首頁</router-link></li>
@@ -47,7 +47,7 @@
     </h2>
     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        我們將會在您下單後2至3個工作天內寄出，請您耐心等候!
+        我們將會在您下單後1至2個工作天內寄出，請您耐心等候!
       </div>
     </div>
   </div>

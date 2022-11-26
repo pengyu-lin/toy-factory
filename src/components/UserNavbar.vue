@@ -17,11 +17,12 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
               <div class="navbar-nav">
                 <router-link to="/products" class="nav-link fs-5">產品列表</router-link>
+                <router-link to="/about" class="nav-link fs-5">關於我們</router-link>
                 <router-link to="/faq" class="nav-link fs-5">常見問題</router-link>
               </div>
             <ul class="nav fs-5 navbar-nav">
-              <li class="nav-item position-relative"><router-link to="/favorite" class="nav-link"><span class="position-absolute top-25 end-0 badge rounded-pill bg-danger d-lg-block d-none" :class="{'d-none': favNum===0}" style="font-size:10px">{{favNum}}</span><i class="bi bi-suit-heart-fill fs-3"></i><span class="d-lg-none fs-5"> 我的最愛</span></router-link></li>
-              <li class="nav-item position-relative"><router-link to="/cart" class="nav-link"><span class="position-absolute top-25 end-0 badge rounded-pill bg-danger d-lg-block d-none" style="font-size:10px" :class="{'d-none': cartNum===0}">{{cartNum}}</span><i class="bi bi-cart3 fs-3"></i><span class="d-lg-none fs-5"> 購物車</span></router-link></li>
+              <li class="nav-item position-relative"><router-link to="/favorite" class="nav-link"><span class="position-absolute top-25 end-0 badge rounded-pill bg-danger badgeNum" :class="{'d-none': favNum===0}" style="font-size:10px">{{favNum}}</span><i class="bi bi-suit-heart-fill fs-3"></i><span class="d-lg-none fs-5"> 我的最愛</span></router-link></li>
+              <li class="nav-item position-relative"><router-link to="/cart" class="nav-link"><span class="position-absolute top-25 end-0 badge rounded-pill bg-danger badgeNum" style="font-size:10px" :class="{'d-none': cartNum===0}">{{cartNum}}</span><i class="bi bi-cart3 fs-3"></i><span class="d-lg-none fs-5"> 購物車</span></router-link></li>
               <li class="nav-item"><router-link to="/login" class="nav-link"><i class="bi bi-person-circle fs-3"></i><span class="d-lg-none fs-5"> 後臺登入</span></router-link></li>
             </ul>
             </div>
@@ -65,13 +66,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.nav-link {
-  color:black;
-  &.active, &:hover {
-    color:#74a9a4;
-    border-bottom: 2px solid #74a9a4;
-  }
-}
-</style>

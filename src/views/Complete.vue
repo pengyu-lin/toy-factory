@@ -32,12 +32,31 @@
   </div>
 
   <div class="text-center">
-    <img src="../assets/images/delivery.png" class="img-fluid pb-3" alt="" style="width:250px">
-    <h2>恭喜您，購買完成!</h2>
-    <h3>商品會在2至3個工作天內送達</h3>
+    <div class="success-checkmark">
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+    <h2 class="fw-bold">恭喜您，購買完成!</h2>
+    <h3>商品會在1至2個工作天內送達</h3>
   </div>
   <div class="d-flex justify-content-center">
-    <button type="buttton" class="btn btnStyle m-3" @click="this.$router.push('/')">回首頁</button>
-    <button type="buttton" class="btn btnStyle m-3" @click="this.$router.push('/products')">繼續購物!</button>
+    <button
+      type="buttton"
+      class="btn btnStyle m-3"
+      @click="this.$router.push('/')"
+    >
+      回首頁
+    </button>
+    <button
+      type="buttton"
+      class="btn btnStyle m-3"
+      @click="this.$router.push('/products')"
+    >
+      繼續購物!
+    </button>
   </div>
 </template>

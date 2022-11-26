@@ -25,7 +25,7 @@
         </h2>
         <hr />
         <div class="fs-4">{{ product.description }}</div>
-        <div class="py-3">{{ product.content }}</div>
+        <div class="py-3 text-secondary" style="white-space: pre-line">{{ product.content }}</div>
         <div class="h5" v-if="product.price === product.origin_price">
           {{ $filters.currency(product.origin_price) }} 元
         </div>
@@ -50,7 +50,7 @@
           <button
             type="button"
             class="btn btn-outline-dark"
-            @click="addToCart(product.id, qty)"
+            @click="addToCart(product.title, product.id, qty)"
           >
             加入購物車
           </button>
@@ -156,7 +156,7 @@ export default {
         this.similarProducts.splice(0, parseInt(this.similarProducts.length) - 4)
       }
     },
-    addToCart (id, qty = 1) {
+    addToCart (item, id, qty = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       const cart = {
         product_id: id,
@@ -165,7 +165,7 @@ export default {
       this.isLoading = true
       this.$http.post(url, { data: cart }).then((response) => {
         this.isLoading = false
-        this.$httpMessageState(response, '加入購物車')
+        this.$httpMessageState(response, `將"${item}"加入購物車`)
         this.emitter.emit('update-cart', id)
       })
     }

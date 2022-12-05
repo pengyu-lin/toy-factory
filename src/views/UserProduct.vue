@@ -116,7 +116,6 @@ export default {
       product: {},
       id: '',
       qty: 1,
-      similarProducts: [],
       isLoading: false
     }
   },
@@ -130,7 +129,6 @@ export default {
         this.isLoading = false
         if (response.data.success) {
           this.product = response.data.product
-          this.getSimilarProducts()
         }
       })
     },
@@ -147,15 +145,6 @@ export default {
         }
       })
     },
-    getSimilarProducts () {
-      this.similarProducts = this.products.filter((item) => {
-        return item.category.match(this.product.category) && item.id !== this.id
-      })
-      this.similarProducts = this.similarProducts.sort(() => Math.random() - 0.5)
-      if (this.similarProducts.length > 4) {
-        this.similarProducts.splice(0, parseInt(this.similarProducts.length) - 4)
-      }
-    },
     addToCart (item, id, qty = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       const cart = {
@@ -168,6 +157,18 @@ export default {
         this.$httpMessageState(response, `將"${item}"加入購物車`)
         this.emitter.emit('update-cart', id)
       })
+    }
+  },
+  computed: {
+    similarProducts () {
+      const similarCategory = this.products.filter((item) => {
+        return item.category.match(this.product.category) && item.id !== this.id
+      })
+      const similarItems = similarCategory.sort(() => Math.random() - 0.5)
+      if (similarItems.length > 4) {
+        similarItems.splice(0, parseInt(similarItems.length) - 4)
+      }
+      return similarItems
     }
   },
   created () {

@@ -26,7 +26,7 @@
                 <p class="h5 text-danger" v-if="item.price!==item.origin_price">特價 {{ $filters.currency(item.price) }} 元</p>
               </div>
               <div class="d-flex">
-                <button type="button" class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white" @click="addCart(item.id)"><i class="bi bi-cart-plus"></i></button>
+                <button type="button" class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white" @click="addCart(item, item.id)"><i class="bi bi-cart-plus"></i></button>
                 <button type="button" class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white" @click="removeFavortie(item, item.id)"><i class="bi bi-trash"></i></button>
               </div>
             </div>
@@ -63,7 +63,7 @@ export default {
           }
         })
     },
-    addCart (id) {
+    addCart (item, id) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.isLoading = true
       this.status.loadingItem = id
@@ -74,7 +74,7 @@ export default {
       this.$http.post(url, { data: cart })
         .then((res) => {
           this.status.loadingItem = ''
-          this.$httpMessageState(res, '加入購物車')
+          this.$httpMessageState(res, `將"${item.title}"加入購物車`)
           this.emitter.emit('update-cart', id)
           this.isLoading = false
         })

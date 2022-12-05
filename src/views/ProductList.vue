@@ -14,7 +14,7 @@
         <p class="mb-0">這裡是快樂的起點~</p>
       </div>
     </div>
-    <div class="row g-4 justify-content-around pt-5">
+    <div class="row g-4 justify-content-around py-5">
       <div class="col-lg-2">
         <div class="text-center d-flex flex-column align-items-center">
           <button

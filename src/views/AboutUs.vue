@@ -29,7 +29,7 @@
       </div>
     </div>
     <div
-      class="row g-3 pt-5 animated" :class="{ fadeIn: animation.second }"
+      class="row g-3 py-5 animated" :class="{ fadeIn: animation.second }"
     >
       <div class="col-lg-6 d-flex align-items-center">
         <div>

@@ -179,7 +179,7 @@
   </section>
 
   <section class="container py-5">
-    <div class="coupon d-flex align-items-center justify-content-end">
+    <div class="coupon d-flex align-items-center justify-content-end overflow-hidden">
       <div
         class="text-center p-lg-5 p-3 animatedRight"
         :class="{ fadeInX: animation.second }"
@@ -202,7 +202,7 @@
     </div>
   </section>
 
-  <section class="container py-3">
+  <section class="container pb-5 py-3">
     <div
       class="subscribe d-flex align-items-center p-5 row-cols-1 row-cols-md-2"
     >

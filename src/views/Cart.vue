@@ -48,7 +48,7 @@
                 <button type="button" class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white" @click="removeCartItem(item, item.id)"><i class="bi bi-trash"></i></button>
             </div>
         </div>
-        <div class="col-lg-4" :class="{'d-none':cart.total===0}">
+        <div class="col-lg-4 pb-5" :class="{'d-none':cart.total===0}">
           <div class="border border-primary p-3">
             <div class="d-flex justify-content-between">
               <p>商品共計:</p>

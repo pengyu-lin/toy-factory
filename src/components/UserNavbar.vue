@@ -61,6 +61,8 @@ export default {
   created () {
     this.getCart()
     this.getFavorite()
+  },
+  mounted () {
     this.emitter.on('update-cart', this.getCart)
     this.emitter.on('update-favorite', this.getFavorite)
   }

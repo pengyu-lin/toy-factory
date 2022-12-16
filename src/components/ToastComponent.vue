@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" ref="toast">
     <div class="toast-header">
@@ -11,11 +10,10 @@
     </div>
   </div>
 </template>
+
 <script>
 import Toast from 'bootstrap/js/dist/toast'
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Toast',
   props: [
     'msg'
   ],

@@ -1,11 +1,10 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-<Loading :active="isLoading"></Loading>
-<div class="text-end pt-3">
-  <button class="btn btn-primary" type="button" @click="openModal">
-    新增商品
-  </button>
-</div>
+  <LoadingEl :active="isLoading" />
+  <div class="text-end pt-3">
+    <button class="btn btn-primary" type="button" @click="openModal">
+      新增商品
+    </button>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -19,7 +18,7 @@
     </thead>
     <tbody>
       <tr v-for="item in products" :key="item.id">
-        <td>{{ item.category}}</td>
+        <td>{{ item.category }}</td>
         <td>{{ item.title }}</td>
         <td class="text-right">
           {{ $filters.currency(item.origin_price) }}
@@ -33,23 +32,42 @@
         </td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-outline-primary btn-sm" @click="openModal(false,item)">編輯</button>
-            <button class="btn btn-outline-danger btn-sm" @click="openDelProductModal(item)">刪除</button>
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm"
+              @click="openModal(false, item)"
+            >
+              編輯
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm"
+              @click="openDelProductModal(item)"
+            >
+              刪除
+            </button>
           </div>
         </td>
       </tr>
     </tbody>
   </table>
-  <Pagination :pages="pagination"
-    @emit-pages="getProducts"></Pagination>
-  <ProductModal ref="productModal" :product="tempProduct" @update-product="updateProduct"></ProductModal>
-  <DelModal ref="delModal" :item="tempProduct" @del-item="delProduct"></DelModal>
+  <Pagination :pages="pagination" @emit-pages="getProducts"/>
+  <ProductModal
+    ref="productModal"
+    :product="tempProduct"
+    @update-product="updateProduct"
+  />
+  <DelModal
+    ref="delModal"
+    :item="tempProduct"
+    @del-item="delProduct"
+  />
 </template>
 
 <script>
 import ProductModal from '../components/ProductModal.vue'
 import DelModal from '../components/DelModal.vue'
-import Pagination from '@/components/Pagination.vue'
+import Pagination from '@/components/PaginationComponent.vue'
 
 export default {
   data () {
@@ -71,15 +89,13 @@ export default {
     getProducts (page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
       this.isLoading = true
-      this.$http.get(api)
-        .then((res) => {
-          this.isLoading = false
-          if (res.data.success) {
-            console.log(res.data)
-            this.products = res.data.products
-            this.pagination = res.data.pagination
-          }
-        })
+      this.$http.get(api).then((res) => {
+        this.isLoading = false
+        if (res.data.success) {
+          this.products = res.data.products
+          this.pagination = res.data.pagination
+        }
+      })
     },
     openModal (isNew, item) {
       if (isNew) {

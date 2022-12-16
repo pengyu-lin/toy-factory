@@ -1,14 +1,13 @@
 <template>
   <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
-       aria-labelledby="exampleModalLabel" aria-hidden="true" ref="modal">
+      aria-labelledby="exampleModalLabel" aria-hidden="true" ref="modal">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="exampleModalLabel">
             <span>訂單細節</span>
           </h5>
-          <button type="button" class="btn-close"
-                  data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -95,18 +94,18 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-primary"
-                  data-bs-dismiss="modal">確認
+          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+            確認
           </button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import modalMixin from '@/mixins/modalMixin'
 export default {
-  name: 'orderModal',
   props: {
     order: {
       type: Object,

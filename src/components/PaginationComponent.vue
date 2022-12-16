@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
@@ -23,8 +22,6 @@
 </template>
 
 <script>
-// :pages="{ 頁碼資訊 }"
-// @emitPages="更新頁面事件"
 export default {
   props: ['pages'],
   methods: {

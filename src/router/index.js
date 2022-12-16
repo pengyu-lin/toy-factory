@@ -3,13 +3,11 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: () => import('@/views/Userboard.vue'),
+    component: () => import('@/views/UserBoard.vue'),
     children: [
       {
         path: '',
-        name: 'home',
-        component: () => import('@/views/Home.vue')
+        component: () => import('@/views/HomePage.vue')
       },
       {
         path: 'products',
@@ -25,49 +23,53 @@ const routes = [
       },
       {
         path: 'products/:productId',
-        component: () => import('@/views/UserProduct.vue')
+        component: () => import('@/views/ProductDetail.vue')
       },
       {
         path: 'cart',
-        component: () => import('@/views/Cart.vue')
+        component: () => import('@/views/CartPage.vue')
       },
       {
         path: 'checkout/',
-        component: () => import('@/views/Checkout.vue')
+        component: () => import('@/views/CheckoutPage.vue')
       },
       {
         path: 'checkout/:orderId',
-        component: () => import('@/views/Payment.vue')
+        component: () => import('@/views/PaymentPage.vue')
       },
       {
         path: 'complete',
-        component: () => import('@/views/Complete.vue')
+        component: () => import('@/views/CompleteCheckout.vue')
       },
       {
         path: 'favorite',
-        component: () => import('@/views/Favorite.vue')
+        component: () => import('@/views/FavoritePage.vue')
       }
     ]
   },
   {
     path: '/login',
-    component: () => import('../views/Login.vue')
+    component: () => import('../views/LoginPage.vue')
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/'
   },
   {
     path: '/dashboard',
-    component: () => import('../views/Dashboard.vue'),
+    component: () => import('../views/DashBoard.vue'),
     children: [
       {
         path: 'products',
-        component: () => import('../views/Products.vue')
+        component: () => import('../views/ProductsPage.vue')
       },
       {
         path: 'orders',
-        component: () => import('../views/Orders.vue')
+        component: () => import('../views/AdminOrders.vue')
       },
       {
         path: 'coupons',
-        component: () => import('../views/Coupons.vue')
+        component: () => import('../views/AdminCoupons.vue')
       }
     ]
   }

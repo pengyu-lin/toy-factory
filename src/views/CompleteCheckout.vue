@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="container py-5">
     <div class="d-flex align-items-center justify-content-around text-nowrap">
@@ -30,7 +29,6 @@
       </div>
     </div>
   </div>
-
   <div class="text-center">
     <div class="success-checkmark">
       <div class="check-icon">
@@ -47,14 +45,14 @@
     <button
       type="buttton"
       class="btn btnStyle m-3"
-      @click="this.$router.push('/')"
+      @click="$router.push('/')"
     >
       回首頁
     </button>
     <button
       type="buttton"
       class="btn btnStyle m-3"
-      @click="this.$router.push('/products')"
+      @click="$router.push('/products')"
     >
       繼續購物!
     </button>

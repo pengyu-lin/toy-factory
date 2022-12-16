@@ -1,6 +1,5 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <Loading :active="isLoading"></Loading>
+  <LoadingEl :active="isLoading"/>
   <table class="table mt-4">
     <thead>
     <tr>
@@ -40,9 +39,9 @@
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm"
+              <button type="button" class="btn btn-outline-primary btn-sm"
                       @click="openModal(item)">檢視</button>
-              <button class="btn btn-outline-danger btn-sm"
+              <button type="button" class="btn btn-outline-danger btn-sm"
                       @click="openDelOrderModal(item)"
               >刪除</button>
             </div>
@@ -60,7 +59,7 @@
 <script>
 import DelModal from '@/components/DelModal.vue'
 import OrderModal from '@/components/OrderModal.vue'
-import Pagination from '@/components/Pagination.vue'
+import Pagination from '@/components/PaginationComponent.vue'
 export default {
   data () {
     return {
@@ -113,10 +112,10 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       this.isLoading = true
       this.$http.delete(url).then((response) => {
-        this.isLoading = false
         const delComponent = this.$refs.delModal
         delComponent.hideModal()
         this.getOrders(this.currentPage)
+        this.isLoading = false
         this.$httpMessageState(response, '刪除')
       })
     }

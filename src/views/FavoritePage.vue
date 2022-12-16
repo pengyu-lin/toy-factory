@@ -1,6 +1,5 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-<Loading :active="isLoading"></Loading>
+<LoadingEl :active="isLoading"/>
 <div class="container py-lg-5">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -15,10 +14,10 @@
             <div class="text-center" :class="{'d-none': favortieProducts.length!==0}">
               <i class="bi bi-suit-heart-fill text-danger" style="font-size:150px"></i>
               <p class="fs-2">來去把喜歡的玩具加入最愛吧~!</p>
-              <button type="button" class="btn btnStyle" @click="this.$router.push('/products')">選玩具</button>
+              <button type="button" class="btn btnStyle" @click="$router.push('/products')">選玩具</button>
             </div>
             <div class="border border-primary d-flex flex-column flex-md-row justify-content-around align-items-center p-3 mb-3 text-center" v-for="item in favortieProducts" :key="item.id">
-              <img :src="item.imageUrl" class="productImg img-fluid" alt="">
+              <img :src="item.imageUrl" class="productImg img-fluid" :alt="item.title">
               <p class="h5 pt-ms-0 pt-3">{{item.title}}</p>
               <div class="d-flex flex-column">
                 <p class="h5 mb-md-0" v-if="item.price===item.origin_price">{{ $filters.currency(item.origin_price) }} 元</p>
@@ -31,7 +30,7 @@
               </div>
             </div>
         </div>
-        <div class="col-md-4"><img src="@/assets/images/guandam.jpg" alt="" class="img-fluid d-none d-lg-block"></div>
+        <div class="col-md-4"><img src="@/assets/images/guandam.jpg" alt="我的最愛" class="img-fluid d-none d-lg-block"></div>
     </div>
 </div>
 </template>

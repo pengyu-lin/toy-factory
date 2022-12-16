@@ -1,5 +1,5 @@
 <template>
-  <Loading :active="isLoading"></Loading>
+  <LoadingEl :active="isLoading"/>
   <section class="container py-lg-5">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -20,8 +20,8 @@
           <button
             type="button"
             class="m-2 category py-2"
-            :class="{ active: this.category === item.value }"
-            @click.prevent="this.category = item.value"
+            :class="{ active: category === item.value }"
+            @click.prevent="category = item.value"
             v-for="item in categoryList"
             :key="item.value"
           >
@@ -75,7 +75,7 @@
                     <button
                       type="button"
                       class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white"
-                      :class="{ active: this.favorite.includes(item.id) }"
+                      :class="{ active: favorite.includes(item.id) }"
                       style="width: 50px; height: 50px"
                       @click="toggleFavorite(item)"
                     >
@@ -85,7 +85,7 @@
                       type="button"
                       class="btn btn-primary btnCircle align-self-end rounded-circle fs-4 text-white"
                       style="width: 50px; height: 50px"
-                      :disabled="this.status.loadingItem === item.id"
+                      :disabled="status.loadingItem === item.id"
                       @click="addCart(item, item.id)"
                     >
                       <i class="bi bi-cart3"></i>
@@ -130,7 +130,6 @@ export default {
       this.$http.get(api).then((res) => {
         this.isLoading = false
         if (res.data.success) {
-          console.log(res.data)
           this.products = res.data.products
         }
       })

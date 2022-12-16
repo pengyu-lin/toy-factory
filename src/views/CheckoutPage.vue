@@ -1,6 +1,5 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-<Loading :active="isLoading"></Loading>
+<LoadingEl :active="isLoading"/>
   <div class="container py-5">
     <div class="d-flex align-items-center justify-content-around text-nowrap">
       <div
@@ -59,7 +58,7 @@
             </div>
             <div class="input-group mb-3">
               <input type="text" class="form-control lh-lg" v-model="coupon_code" placeholder="輸入優惠碼">
-              <button class="btn btn-dark" type="button" @click="addCouponCode">套用</button>
+              <button type="button" class="btn btn-dark" @click="addCouponCode">套用</button>
             </div>
             <div class="d-flex justify-content-between" v-if="cart.final_total === cart.total">
               <p>合計:</p>
@@ -73,10 +72,10 @@
           </div>
         </div>
     </div>
-    <Form class="col-md-6 border p-3" v-slot="{ errors }" @submit="createOrder">
+    <FormEl class="col-md-6 border p-3" v-slot="{ errors }" @submit="createOrder">
       <div class="mb-3">
         <label for="email" class="form-label">Email*</label>
-        <Field
+        <FieldEl
           id="email"
           name="email"
           type="email"
@@ -85,13 +84,13 @@
           placeholder="請輸入 Email"
           rules="email|required"
           v-model="form.user.email"
-        ></Field>
-        <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
+        ></FieldEl>
+        <ErrorMessage name="email" class="invalid-feedback"/>
       </div>
 
       <div class="mb-3">
         <label for="name" class="form-label">收件人姓名*</label>
-        <Field
+        <FieldEl
           id="name"
           name="姓名"
           type="text"
@@ -100,13 +99,13 @@
           placeholder="請輸入姓名"
           rules="required"
           v-model="form.user.name"
-        ></Field>
-        <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
+        ></FieldEl>
+        <ErrorMessage name="姓名" class="invalid-feedback"/>
       </div>
 
       <div class="mb-3">
         <label for="tel" class="form-label">收件人電話*</label>
-        <Field
+        <FieldEl
           id="tel"
           name="電話"
           type="tel"
@@ -115,13 +114,13 @@
           placeholder="請輸入電話"
           rules="required"
           v-model="form.user.tel"
-        ></Field>
-        <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
+        ></FieldEl>
+        <ErrorMessage name="電話" class="invalid-feedback"/>
       </div>
 
       <div class="mb-3">
         <label for="address" class="form-label">收件人地址*</label>
-        <Field
+        <FieldEl
           id="address"
           name="地址"
           type="text"
@@ -130,8 +129,8 @@
           placeholder="請輸入地址"
           rules="required"
           v-model="form.user.address"
-        ></Field>
-        <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
+        ></FieldEl>
+        <ErrorMessage name="地址" class="invalid-feedback"/>
       </div>
 
       <div class="mb-3">
@@ -148,7 +147,7 @@
           <option value="ApplePay">ApplePay</option>
           <option value="GooglePay">GooglePay</option>
         </select>
-        <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
+        <ErrorMessage name="地址" class="invalid-feedback"/>
       </div>
 
       <div class="mb-3">
@@ -164,13 +163,14 @@
       </div>
       <div class="text-end">
         <button
+          type="submit"
           class="btn btnStyle"
-          :class="{ disabled: this.payment === '選擇付款方式' }"
+          :class="{ disabled: payment === '選擇付款方式' }"
         >
           送出訂單
         </button>
       </div>
-    </Form>
+    </FormEl>
   </div>
   </div>
 </template>
@@ -188,7 +188,6 @@ export default {
         },
         message: ''
       },
-      orderId: '',
       payment: '選擇付款方式',
       cart: {},
       coupon_code: '',
@@ -202,15 +201,14 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
       const order = this.form
       this.$http.post(url, { data: order }).then((res) => {
-        this.orderId = res.data.orderId
-        this.$router.push(`/checkout/${this.orderId}`)
+        const orderId = res.data.orderId
+        this.$router.push(`/checkout/${orderId}`)
       })
     },
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.isLoading = true
       this.$http.get(url).then((response) => {
-        console.log(response)
         this.cart = response.data.data
         this.isLoading = false
       })

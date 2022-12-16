@@ -1,5 +1,5 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
+<LoadingEl :active="isLoading"/>
     <div class="container py-5">
         <div class="d-flex align-items-center justify-content-around text-nowrap">
         <div class="border d-inline-block text-center p-4" style="width:150px;height:150px">
@@ -22,7 +22,6 @@
         </div>
     </div>
 
-    <Loading :active="isLoading"></Loading>
   <div class="my-5 row justify-content-center">
     <form class="col-md-4" @submit.prevent="payOrder">
       <table class="table align-middle">
@@ -73,7 +72,7 @@
         </tbody>
       </table>
       <div class="text-end" v-if="order.is_paid === false">
-        <button class="btn btnStyle">確認付款去</button>
+        <button type="submit" class="btn btnStyle">確認付款去</button>
       </div>
     </form>
   </div>
@@ -98,7 +97,6 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.order = res.data.order
-            console.log(this.order)
             this.isLoading = false
           }
         })
@@ -107,7 +105,6 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`
       this.$http.post(url)
         .then((res) => {
-          console.log(res)
           if (res.data.success) {
             this.getOrder()
             this.$router.push('/complete')
@@ -117,7 +114,6 @@ export default {
   },
   created () {
     this.orderId = this.$route.params.orderId
-    console.log(this.orderId)
     this.getOrder()
   }
 }

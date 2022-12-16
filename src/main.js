@@ -1,4 +1,3 @@
-/* eslint-disable vue/multi-word-component-names */
 import { createApp } from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -34,8 +33,8 @@ setLocale('zh_TW')
 app.use(VueAxios, axios)
 app.use(router)
 app.use(VueClipboard)
-app.component('Loading', Loading)
-app.component('Form', Form)
-app.component('Field', Field)
+app.component('LoadingEl', Loading)
+app.component('FormEl', Form)
+app.component('FieldEl', Field)
 app.component('ErrorMessage', ErrorMessage)
 app.mount('#app')

@@ -1,6 +1,5 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <Loading :active="isLoading"></Loading>
+  <LoadingEl :active="isLoading"/>
   <header class="container pt-3">
     <div class="text-center header px-4 py-5">
       <div class="text-white text-center p-3 cover d-inline-block">
@@ -65,14 +64,14 @@
           <button
             type="button"
             class="btn btnStyle"
-            @click.prevent="this.$router.push('/products')"
+            @click.prevent="$router.push('/products')"
           >
             買玩具去~
           </button>
         </div>
       </div>
       <div class="col-lg-6">
-        <img src="../assets/images/legoman.jpg" alt="" class="w-100" />
+        <img src="../assets/images/legoman.jpg" alt="買玩具" class="w-100" />
       </div>
     </div>
   </section>
@@ -84,7 +83,7 @@
         <a
           href="#"
           class="text-decoration-none fs-5 text-end fw-bold"
-          @click.prevent="this.$router.push('/products')"
+          @click.prevent="$router.push('/products')"
           >更多玩具<i class="bi bi-arrow-right"></i
         ></a>
       </div>
@@ -130,7 +129,7 @@
             <img
               :src="item.imageUrl"
               class="card-img-top img-fluid"
-              alt=""
+              :alt="item.title"
               style="object-fit: cover; height: 200px; cursor: pointer"
               @click="getProduct(item.id)"
             />
@@ -163,8 +162,9 @@
                 </div>
                 <div class="text-end">
                   <button
+                    type="button"
                     class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white"
-                    :disabled="this.status.loadingItem === item.id"
+                    :disabled="status.loadingItem === item.id"
                     @click.prevent="addCart(item, item.id)"
                   >
                     <i class="bi bi-cart3"></i>
@@ -290,7 +290,6 @@ export default {
       this.$http.post(url, { data: cart }).then((res) => {
         this.isLoading = false
         this.status.loadingItem = ''
-        console.log(res)
         this.$httpMessageState(res, `將"${item.title}"加入購物車`)
         this.emitter.emit('update-cart', id)
       })

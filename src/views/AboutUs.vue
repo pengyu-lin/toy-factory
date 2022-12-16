@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <img src="../assets/images/bg7.jpg" alt="" class="w-100" />
+        <img src="../assets/images/bg7.jpg" alt="關於我們" class="w-100" />
       </div>
     </div>
     <div
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <img src="../assets/images/bg6.jpg" alt="" class="w-100" />
+        <img src="../assets/images/bg6.jpg" alt="關於我們" class="w-100" />
       </div>
     </div>
   </section>

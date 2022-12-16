@@ -1,6 +1,5 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template v-if="cart.carts">
-<Loading :active="isLoading"></Loading>
+<LoadingEl :active="isLoading"/>
     <div class="container py-lg-5">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -13,12 +12,12 @@
         <div class="text-center" :class="{'d-none':cart.total!==0}">
           <i class="bi bi-cart4" style="font-size:150px"></i>
           <p class="fs-2">購物車是空的，來去逛逛吧!</p>
-          <button type="button" class="btnStyle" @click="this.$router.push('/products')">選玩具</button>
+          <button type="button" class="btnStyle" @click="$router.push('/products')">選玩具</button>
         </div>
       <div class="row">
         <div class="col-lg-8">
           <div class="border border-primary d-flex flex-column flex-md-row align-items-center p-3 mb-3 text-center" v-for="item in cart.carts" :key="item.id">
-              <img :src="item.product.imageUrl" class="productImg" alt="">
+              <img :src="item.product.imageUrl" class="productImg" :alt="item.product.title">
               <p class="h6 my-3 my-md-0" style="width:30%">{{item.product.title}}</p>
               <div class="input-group" style="width:150px">
                 <button
@@ -56,7 +55,7 @@
             </div>
             <div class="input-group mb-3">
               <input type="text" class="form-control lh-lg border-dark" v-model="coupon_code" placeholder="輸入優惠碼">
-              <button class="btn btn-dark" type="button" @click="addCouponCode">套用</button>
+              <button type="button" class="btn btn-dark" @click="addCouponCode">套用</button>
             </div>
             <div class="d-flex justify-content-between" v-if="cart.final_total === cart.total">
               <p>合計:</p>

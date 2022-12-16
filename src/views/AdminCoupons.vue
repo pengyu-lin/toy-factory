@@ -1,9 +1,8 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
-    <Loading :active="isLoading"></Loading>
+    <LoadingEl :active="isLoading"/>
     <div class="text-end pt-3">
-      <button class="btn btn-primary" @click="openCouponModal(true)">
+      <button type="button" class="btn btn-primary" @click="openCouponModal(true)">
         建立新的優惠券
       </button>
     </div>
@@ -28,10 +27,10 @@
         </td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-outline-primary btn-sm"
+            <button type="button" class="btn btn-outline-primary btn-sm"
                     @click="openCouponModal(false, item)"
             >編輯</button>
-            <button class="btn btn-outline-danger btn-sm"
+            <button type="button" class="btn btn-outline-danger btn-sm"
                     @click="openDelCouponModal(item)"
             >刪除</button>
           </div>
@@ -89,14 +88,12 @@ export default {
       this.$http.get(url, this.tempProduct).then((response) => {
         this.coupons = response.data.coupons
         this.isLoading = false
-        console.log(response)
       })
     },
     updateCoupon (tempCoupon) {
       if (this.isNew) {
         const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon`
         this.$http.post(url, { data: tempCoupon }).then((response) => {
-          console.log(response, tempCoupon)
           this.$httpMessageState(response, '新增優惠券')
           this.getCoupons()
           this.$refs.couponModal.hideModal()
@@ -104,7 +101,6 @@ export default {
       } else {
         const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
         this.$http.put(url, { data: this.tempCoupon }).then((response) => {
-          console.log(response)
           this.$httpMessageState(response, '更新優惠券')
           this.getCoupons()
           this.$refs.couponModal.hideModal()
@@ -115,7 +111,6 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
       this.isLoading = true
       this.$http.delete(url).then((response) => {
-        console.log(response, this.tempCoupon)
         this.$httpMessageState(response, '刪除優惠券')
         const delComponent = this.$refs.delModal
         delComponent.hideModal()

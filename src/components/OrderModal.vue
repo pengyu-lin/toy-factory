@@ -1,13 +1,25 @@
 <template>
-  <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalLabel" aria-hidden="true" ref="modal">
+  <div
+    class="modal fade"
+    id="productModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    ref="modal"
+  >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="exampleModalLabel">
             <span>訂單細節</span>
           </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          />
         </div>
         <div class="modal-body">
           <div class="row">
@@ -16,7 +28,7 @@
               <table class="table">
                 <tbody v-if="tempOrder.user">
                   <tr>
-                    <th style="width: 100px;">姓名</th>
+                    <th style="width: 100px">姓名</th>
                     <td>{{ tempOrder.user.name }}</td>
                   </tr>
                   <tr>
@@ -44,7 +56,7 @@
                   </tr>
                   <tr>
                     <th>下單時間</th>
-                    <td>{{ $filters.date(tempOrder.create_at)}}</td>
+                    <td>{{ $filters.date(tempOrder.create_at) }}</td>
                   </tr>
                   <tr>
                     <th>付款時間</th>
@@ -58,7 +70,9 @@
                   <tr>
                     <th>付款狀態</th>
                     <td>
-                      <strong v-if="tempOrder.is_paid" class="text-success">已付款</strong>
+                      <strong v-if="tempOrder.is_paid" class="text-success"
+                        >已付款</strong
+                      >
                       <span v-else class="text-muted">尚未付款</span>
                     </td>
                   </tr>
@@ -73,17 +87,14 @@
               <h3>選購商品</h3>
               <table class="table">
                 <thead>
-                  <tr>
-                  </tr>
+                  <tr></tr>
                 </thead>
                 <tbody>
                   <tr v-for="item in tempOrder.products" :key="item.id">
                     <th>
                       {{ item.product.title }}
                     </th>
-                    <td>
-                      {{ item.qty }} / {{ item.product.unit }}
-                    </td>
+                    <td>{{ item.qty }} / {{ item.product.unit }}</td>
                     <td class="text-end">
                       {{ $filters.currency(item.final_total) }}
                     </td>
@@ -94,7 +105,11 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            data-bs-dismiss="modal"
+          >
             確認
           </button>
         </div>
@@ -109,7 +124,9 @@ export default {
   props: {
     order: {
       type: Object,
-      default () { return {} }
+      default () {
+        return {}
+      }
     }
   },
   data () {

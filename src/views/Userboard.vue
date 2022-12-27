@@ -15,7 +15,7 @@
       style="height: 50px; width: 50px"
       @click="scrollToTop"
     >
-      <i class="bi bi-arrow-up"></i>
+      <i class="bi bi-arrow-up"/>
     </button>
   </div>
 </template>

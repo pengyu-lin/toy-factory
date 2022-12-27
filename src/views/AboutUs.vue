@@ -13,9 +13,7 @@
         <p class="mb-0">玩具世界，歡樂無邊！</p>
       </div>
     </div>
-    <div
-      class="row flex-row-reverse g-3 pt-5 animated" :class="{ fadeIn: animation.first }"
-    >
+    <div class="row flex-row-reverse g-3 pt-5">
       <div class="col-lg-6 d-flex align-items-center">
         <div>
           <h2 class="fw-bold">關於「玩具工坊」</h2>
@@ -28,9 +26,7 @@
         <img src="../assets/images/bg7.jpg" alt="關於我們" class="w-100" />
       </div>
     </div>
-    <div
-      class="row g-3 py-5 animated" :class="{ fadeIn: animation.second }"
-    >
+    <div class="row g-3 py-5">
       <div class="col-lg-6 d-flex align-items-center">
         <div>
           <h2 class="fw-bold">每個人心中都住著一個孩子</h2>
@@ -45,25 +41,3 @@
     </div>
   </section>
 </template>
-
-<script>
-export default {
-  data () {
-    return {
-      animation: {
-        first: false,
-        second: false
-      }
-    }
-  },
-  methods: {
-    handleScroll () {
-      this.animation.first = window.scrollY > 0
-      this.animation.second = window.scrollY > 300
-    }
-  },
-  created () {
-    window.addEventListener('scroll', this.handleScroll)
-  }
-}
-</script>

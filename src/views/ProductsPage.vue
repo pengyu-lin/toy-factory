@@ -51,17 +51,13 @@
       </tr>
     </tbody>
   </table>
-  <Pagination :pages="pagination" @emit-pages="getProducts"/>
+  <Pagination :pages="pagination" @emit-pages="getProducts" />
   <ProductModal
     ref="productModal"
     :product="tempProduct"
     @update-product="updateProduct"
   />
-  <DelModal
-    ref="delModal"
-    :item="tempProduct"
-    @del-item="delProduct"
-  />
+  <DelModal ref="delModal" :item="tempProduct" @del-item="delProduct" />
 </template>
 
 <script>
@@ -90,11 +86,11 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
       this.isLoading = true
       this.$http.get(api).then((res) => {
-        this.isLoading = false
         if (res.data.success) {
           this.products = res.data.products
           this.pagination = res.data.pagination
         }
+        this.isLoading = false
       })
     },
     openModal (isNew, item) {

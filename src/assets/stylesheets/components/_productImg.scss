@@ -1,7 +1,9 @@
 .productImg {
-  max-width: 150px;
-  object-fit: contain;
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
   @media (max-width: 768px) {
-    max-width: 100%;
+    width: 100%;
+    height: auto;
   }
 }

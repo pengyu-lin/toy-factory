@@ -147,7 +147,7 @@
                   id="description"
                   v-model="tempProduct.description"
                   placeholder="請輸入產品描述"
-                ></textarea>
+                />
               </div>
               <div class="mb-3">
                 <label for="content" class="form-label">說明內容</label>
@@ -156,8 +156,7 @@
                   class="form-control"
                   id="content"
                   v-model="tempProduct.content"
-                  placeholder="請輸入產品說明內容"
-                ></textarea>
+                  placeholder="請輸入產品說明內容"/>
               </div>
               <div class="mb-3">
                 <div class="form-check">

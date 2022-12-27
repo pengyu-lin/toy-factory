@@ -1,5 +1,5 @@
 <template>
-  <LoadingEl :active="isLoading"/>
+  <LoadingEl :active="isLoading" />
   <section class="container py-lg-5">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -32,20 +32,17 @@
       <div class="col-lg-9">
         <div class="row row-cols-lg-3 row-cols-sm-2 row-cols-1 g-4">
           <div class="col" v-for="item in filterProducts" :key="item.id">
-            <div class="card h-100 border overflow-hidden">
+            <div class="card h-100 border cardHover">
               <img
                 :src="item.imageUrl"
                 class="card-img-top img-fluid"
                 style="object-fit: cover; height: 200px; cursor: pointer"
                 :alt="item.title"
                 :title="item.title"
-                @click="getProduct(item.id)"
               />
               <div class="card-body d-flex flex-column justify-content-between">
                 <div>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
+                  <div class="d-flex justify-content-between align-items-center">
                     <h5 class="card-title fw-bold text-primary mb-0">
                       {{ item.title }}
                     </h5>
@@ -61,17 +58,14 @@
                     <p class="h5" v-if="item.price === item.origin_price">
                       {{ $filters.currency(item.origin_price) }} 元
                     </p>
-                    <del class="h6" v-if="item.price !== item.origin_price"
-                      >原價 {{ $filters.currency(item.origin_price) }} 元</del
-                    >
-                    <p
-                      class="h5 text-danger"
-                      v-if="item.price !== item.origin_price"
-                    >
+                    <del class="h6" v-if="item.price !== item.origin_price">
+                      原價 {{ $filters.currency(item.origin_price) }} 元
+                    </del>
+                    <p class="h5 text-danger" v-if="item.price !== item.origin_price">
                       特價 {{ $filters.currency(item.price) }} 元
                     </p>
                   </div>
-                  <div class="text-end">
+                  <div class="text-end position-relative" style="z-index:3;">
                     <button
                       type="button"
                       class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white"
@@ -79,7 +73,7 @@
                       style="width: 50px; height: 50px"
                       @click="toggleFavorite(item)"
                     >
-                      <i class="bi bi-suit-heart"></i>
+                      <i class="bi bi-suit-heart"/>
                     </button>
                     <button
                       type="button"
@@ -88,10 +82,11 @@
                       :disabled="status.loadingItem === item.id"
                       @click="addCart(item, item.id)"
                     >
-                      <i class="bi bi-cart3"></i>
+                      <i class="bi bi-cart3"/>
                     </button>
                   </div>
                 </div>
+                <a href="#" class="stretched-link" @click.prevent="getProduct(item.id)"></a>
               </div>
             </div>
           </div>
@@ -128,10 +123,10 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
       this.isLoading = true
       this.$http.get(api).then((res) => {
-        this.isLoading = false
         if (res.data.success) {
           this.products = res.data.products
         }
+        this.isLoading = false
       })
     },
     getProduct (id) {
@@ -146,14 +141,13 @@ export default {
         qty: 1
       }
       this.$http.post(url, { data: cart }).then((res) => {
-        this.isLoading = false
         this.status.loadingItem = ''
-        this.$httpMessageState(res, `將"${item.title}"加入購物車`)
         this.emitter.emit('update-cart', id)
+        this.isLoading = false
+        this.$httpMessageState(res, `將"${item.title}"加入購物車`)
       })
     },
     toggleFavorite (item) {
-      this.isLoading = true
       if (this.favorite.includes(item.id)) {
         this.favorite.splice(this.favorite.indexOf(item.id), 1)
         this.$httpMessageState(
@@ -175,7 +169,6 @@ export default {
           `將"${item.title}"加入我的最愛`
         )
       }
-      this.isLoading = false
       favorite.addToFavorite(this.favorite)
       this.emitter.emit('update-favorite', this.favorite)
     }

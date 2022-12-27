@@ -1,7 +1,10 @@
 <template>
-  <LoadingEl :active="isLoading"/>
+  <LoadingEl :active="isLoading" />
   <header class="container pt-3">
     <div class="text-center header px-4 py-5">
+      <div class="chevron"></div>
+      <div class="chevron"></div>
+      <div class="chevron"></div>
       <div class="text-white text-center p-3 cover d-inline-block">
         <p class="mb-0">步入玩具世界，尋找快樂源泉！</p>
         <h1 class="fw-bold my-3">玩出自己的世界!</h1>
@@ -14,20 +17,27 @@
     <h2 class="text-center lh-lg">—— 主要服務項目 ——</h2>
     <div class="row row-cols-1 row-cols-md-3">
       <div class="col">
-        <div class="card border-0 animated" :class="{ fadeIn: animation.special }">
+        <div
+          class="card border-0 animated"
+          :class="{ fadeIn: animation.special }"
+        >
           <div class="card-body text-center">
-            <h5 class="card-title fs-1"><i class="bi bi-globe"></i></h5>
+            <h5 class="card-title fs-1"><i class="bi bi-globe"/></h5>
             <h5 class="card-title fw-bold">優質的玩具</h5>
             <p class="card-text">
-              我們販售的玩具都是經過精挑細選的，絕對品質保證!讓您買的安心、玩得開心。
+              我們販售的玩具都是經過精挑細選的，也有進口的，絕對品質保證!讓您買的安心、玩得開心。
             </p>
           </div>
         </div>
       </div>
       <div class="col">
-        <div class="card border-0 animated" :class="{ fadeIn: animation.special }" style="transition: all 1.5s 0.3s;">
+        <div
+          class="card border-0 animated"
+          :class="{ fadeIn: animation.special }"
+          style="transition: all 1.5s 0.3s"
+        >
           <div class="card-body text-center">
-            <h5 class="card-title fs-1"><i class="bi bi-truck"></i></h5>
+            <h5 class="card-title fs-1"><i class="bi bi-truck"/></h5>
             <h5 class="card-title fw-bold">快速的出貨</h5>
             <p class="card-text">
               我們有與「白貓宅急便」合作，每當收到訂單，將會安全的以最快的時間將玩具送到您手裡!
@@ -36,12 +46,20 @@
         </div>
       </div>
       <div class="col">
-        <div class="card border-0 animated" :class="{ fadeIn: animation.special }" style="transition: all 1.5s 0.6s;">
+        <div
+          class="card border-0 animated"
+          :class="{ fadeIn: animation.special }"
+          style="transition: all 1.5s 0.6s"
+        >
           <div class="card-body text-center">
-            <h5 class="card-title fs-1"><i class="bi bi-people"></i></h5>
+            <h5 class="card-title fs-1"><i class="bi bi-people"/></h5>
             <h5 class="card-title fw-bold">完善的服務</h5>
             <p class="card-text">
-              我們提供完善的售後服務。不論有甚麼相關的問題，都可以聯絡<a href="mailto:toy-factory@support.com" class="text-decoration-none">客服信箱</a>，將會有專人為您服務!
+              我們提供完善的售後服務。不論有甚麼相關的問題，都可以聯絡<a
+                href="mailto:toy-factory@support.com"
+                class="text-decoration-none"
+                >客服信箱</a
+              >，將會有專人為您服務!
             </p>
           </div>
         </div>
@@ -66,7 +84,7 @@
             class="btn btnStyle"
             @click.prevent="$router.push('/products')"
           >
-            買玩具去~
+            點我去選玩具~
           </button>
         </div>
       </div>
@@ -79,7 +97,7 @@
   <section class="py-3">
     <div class="container">
       <div class="d-flex justify-content-between">
-        <h3><i class="bi bi-star-fill text-warning"></i> 精選玩具</h3>
+        <h3><i class="bi bi-star-fill text-warning"/> 精選玩具</h3>
         <a
           href="#"
           class="text-decoration-none fs-5 text-end fw-bold"
@@ -125,13 +143,12 @@
           :key="item.id"
           class="h-auto"
         >
-          <div class="card h-100 border overflow-hidden">
+          <div class="card h-100 border">
             <img
               :src="item.imageUrl"
               class="card-img-top img-fluid"
               :alt="item.title"
               style="object-fit: cover; height: 200px; cursor: pointer"
-              @click="getProduct(item.id)"
             />
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
@@ -160,18 +177,19 @@
                     現在只要 {{ $filters.currency(item.price) }} 元
                   </p>
                 </div>
-                <div class="text-end">
+                <div class="text-end position-relative" style="z-index:3;">
                   <button
                     type="button"
                     class="btn btn-primary btnCircle mx-2 rounded-circle fs-4 text-white"
                     :disabled="status.loadingItem === item.id"
                     @click.prevent="addCart(item, item.id)"
                   >
-                    <i class="bi bi-cart3"></i>
+                    <i class="bi bi-cart3"/>
                   </button>
                 </div>
               </div>
             </div>
+            <a href="#" class="stretched-link" @click.prevent="getProduct(item.id)"></a>
           </div>
         </swiper-slide>
       </swiper>
@@ -179,15 +197,17 @@
   </section>
 
   <section class="container py-5">
-    <div class="coupon d-flex align-items-center justify-content-end overflow-hidden">
+    <div
+      class="coupon d-flex align-items-center justify-content-end overflow-hidden"
+    >
       <div
         class="text-center p-lg-5 p-3 animatedRight"
         :class="{ fadeInX: animation.second }"
       >
         <h2 class="fs-1 fw-bold">
-          <i class="bi bi-balloon-fill text-danger"></i>開幕優惠<i
+          <i class="bi bi-balloon-fill text-danger"/>開幕優惠<i
             class="bi bi-balloon-fill text-danger"
-          ></i>
+          />
         </h2>
         <p class="fs-3">
           歡慶開幕!<br class="d-lg-none" />
@@ -265,11 +285,11 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
       this.isLoading = true
       this.$http.get(api).then((res) => {
-        this.isLoading = false
         if (res.data.success) {
           this.products = res.data.products
           this.getRandomProducts()
         }
+        this.isLoading = false
       })
     },
     getProduct (id) {
@@ -288,10 +308,10 @@ export default {
         qty: 1
       }
       this.$http.post(url, { data: cart }).then((res) => {
-        this.isLoading = false
         this.status.loadingItem = ''
-        this.$httpMessageState(res, `將"${item.title}"加入購物車`)
         this.emitter.emit('update-cart', id)
+        this.isLoading = false
+        this.$httpMessageState(res, `將"${item.title}"加入購物車`)
       })
     },
     getRandomProducts () {

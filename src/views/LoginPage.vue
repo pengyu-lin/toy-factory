@@ -1,7 +1,6 @@
 <template>
   <div class="container mt-5">
-    <form class="row justify-content-center"
-      @submit.prevent="signIn">
+    <form class="row justify-content-center" @submit.prevent="signIn">
       <div class="col-md-6">
         <h1 class="h3 mb-3 font-weight-normal">後臺登入</h1>
         <div class="mb-2">
@@ -30,8 +29,10 @@
 
         <div class="d-flex justify-content-between align-items-center mt-4">
           <div>
-          <router-link to="/" class="fs-5 fw-bold text-decoration-none"><i class="bi bi-arrow-left"></i>回到首頁</router-link>
-          <p class="text-secondary">不是管理者嗎?</p>
+            <router-link to="/" class="fs-5 fw-bold text-decoration-none">
+              <i class="bi bi-arrow-left"/>回到首頁
+            </router-link>
+            <p class="text-secondary">不是管理者嗎?</p>
           </div>
           <button class="btn btnStyle" type="submit">登入</button>
         </div>
@@ -53,14 +54,13 @@ export default {
   methods: {
     signIn () {
       const api = `${process.env.VUE_APP_API}admin/signin`
-      this.$http.post(api, this.user)
-        .then((res) => {
-          if (res.data.success) {
-            const { token, expired } = res.data
-            document.cookie = `hexToken=${token};expires=${new Date(expired)}`
-            this.$router.push('/dashboard/products')
-          }
-        })
+      this.$http.post(api, this.user).then((res) => {
+        if (res.data.success) {
+          const { token, expired } = res.data
+          document.cookie = `hexToken=${token};expires=${new Date(expired)}`
+          this.$router.push('/dashboard/products')
+        }
+      })
     }
   }
 }

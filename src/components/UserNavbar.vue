@@ -51,7 +51,7 @@
                     style="font-size: 10px"
                     >{{ favNum }}</span
                   >
-                  <i class="bi bi-suit-heart-fill fs-3"></i>
+                  <i class="bi bi-suit-heart-fill fs-3"/>
                   <span class="d-lg-none fs-5"> 我的最愛</span>
                 </router-link>
               </li>

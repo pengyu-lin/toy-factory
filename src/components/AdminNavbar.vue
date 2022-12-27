@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">後台</a>
       <button
@@ -11,14 +11,22 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"/>
+        <span class="navbar-toggler-icon" />
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <router-link to="/dashboard/products" class="nav-link text-white">產品</router-link>
-          <router-link to="/dashboard/orders" class="nav-link text-white">訂單</router-link>
-          <router-link to="/dashboard/coupons" class="nav-link text-white">優惠券</router-link>
-          <a href="#" @click.prevent="logout" class="nav-link text-white">登出</a>
+          <router-link to="/dashboard/products" class="nav-link text-white">
+            產品
+          </router-link>
+          <router-link to="/dashboard/orders" class="nav-link text-white">
+            訂單
+          </router-link>
+          <router-link to="/dashboard/coupons" class="nav-link text-white">
+            優惠券
+          </router-link>
+          <a href="#" @click.prevent="logout" class="nav-link text-white">
+            登出
+          </a>
         </div>
       </div>
     </div>
@@ -30,12 +38,11 @@ export default {
   methods: {
     logout () {
       const api = `${process.env.VUE_APP_API}logout`
-      this.$http.post(api, this.user)
-        .then((res) => {
-          if (res.data.success) {
-            this.$router.push('/login')
-          }
-        })
+      this.$http.post(api, this.user).then((res) => {
+        if (res.data.success) {
+          this.$router.push('/login')
+        }
+      })
     }
   }
 }

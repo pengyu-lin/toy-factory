@@ -9,7 +9,7 @@
     </nav>
     <h2><i class="bi bi-cart3 fs-3"/> 購物車</h2>
     <hr />
-    <div class="text-center" :class="{ 'd-none': cart.total !== 0 }">
+    <div class="text-center pb-5" :class="{ 'd-none': cart.total !== 0 }">
       <i class="bi bi-cart4" style="font-size: 150px"/>
       <p class="fs-2">購物車是空的，來去逛逛吧!</p>
       <button type="button" class="btnStyle" @click="$router.push('/products')">

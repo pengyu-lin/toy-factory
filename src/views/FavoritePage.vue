@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-lg-8">
         <div
-          class="text-center"
+          class="text-center pb-5"
           :class="{ 'd-none': favortieProducts.length !== 0 }"
         >
           <i
